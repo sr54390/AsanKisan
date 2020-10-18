@@ -36,7 +36,7 @@ export default class GuideWheatstep3 extends Component{
                    
                       style={styles.checkbox}
                     />
-                    <Text style={styles.label}>Do you like React Native?</Text>
+                    <Text style={styles.label}>Water the Field</Text>
                   </View>
          {/* powedering */}
          <View style={styles.checkboxContainer}>
