@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   ImageBackground,
-  ActivityIndicator,
+  ActivityIndicator, TouchableOpacity
 } from "react-native";
 import AppButton from "../components/AppButton";
 import { TextInput } from "react-native-paper";
@@ -26,15 +26,12 @@ export default class Weather extends Component {
       region: "karachi",
     };
     this._getWeatherReport = this._getWeatherReport.bind(this);
-  }
-  _handlePress() {
-    console.log(this.state.country);
-    console.log(this.state.region);
+    this._handlePress = this._handlePress.bind(this)
   }
 
   async _getWeatherReport() {
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.country},${this.state.region}&appid=110331aa1734a77c2acdce2d349b7574&units=metric`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.region},${this.state.country}&appid=110331aa1734a77c2acdce2d349b7574&units=metric`
     );
     const data = await response.json();
     this.setState({
@@ -47,7 +44,14 @@ export default class Weather extends Component {
     });
   }
 
+   _handlePress() {
+    this._getWeatherReport()
+  }
+
+
+
   async componentDidMount() {
+    console.log("flag is here " + this.state.region)
     await this._getWeatherReport();
   }
 
@@ -67,7 +71,7 @@ export default class Weather extends Component {
         style={styles.background}
         source={require("../assets/weatherBackground.jpg")}
       >
-        {/* <View style={styles.content}>
+        <View style={styles.content}>
           <TextInput
             placeholder="Enter Country"
             returnKeyLabel={"next"}
@@ -77,19 +81,25 @@ export default class Weather extends Component {
           <TextInput
             placeholder="Enter Region"
             returnKeyLabel={"next"}
-            onChangeText={(text) => this.setState({ region: text })}
+            onChangeText={(text) =>{ this.setState({ region: text }) 
+          console.log(this.state.region) }}
           />
           <View />
         </View>
-        <View style={styles.submitButton}>
-          <Button
-            style={styles.submitButton}
-            onPress={() => this._handlePress()}
-            style={styles.buttonStyle}
+        <View >
+          <TouchableOpacity
+               style={styles.submitButton}
+          onPress={this._handlePress}>
+          <Text
+       
+            // onPress={() => this._handlePress}
+            //style={styles.buttonStyle}
           >
             Submit
-          </Button>
-        </View> */}
+          </Text>
+          </TouchableOpacity>
+         
+        </View>
         <View style={styles.title}>
           <Header
             data={[this.state.report.list[0], this.state.report.detail]}
