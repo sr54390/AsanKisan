@@ -23,13 +23,14 @@ export default class Dashboard extends Component {
     email:""
   }
   componentDidMount(){
-    const {email,displayName}= firebase.auth().currentUser;
+    const {email,displayName}= firebase.auth().currentUser
     this.setState({email,displayName});
 
   }
   signOutUser = ()=>{
 
     firebase.auth().signOut();
+    this.props.navigation.navigate("Welcome")
 
   }
   render(){
@@ -40,8 +41,9 @@ export default class Dashboard extends Component {
       source={require("../assets/dashboard.jpg")}
       style={styles.background}
     >
-      <View><Text>Welcome Back {this.state.displayName}</Text></View>
-      <TouchableOpacity onPress={this.signOutUser}><Text>Logout</Text></TouchableOpacity>
+      <View style={styles.topNavigation}><Text style={{fontSize:18,fontFamily:"Roboto",marginLeft:10,color:"#fff"}}>{this.state.displayName}</Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={this.signOutUser}><Text style={{fontSize:18,marginLeft:10}}>Logout</Text></TouchableOpacity>
+      </View>
       <View style={styles.topNavigation}>
         <Text style={styles.mainTitle}> Asan Kisan</Text>
 
@@ -50,6 +52,7 @@ export default class Dashboard extends Component {
           name={"md-notifications"}
           size={28}
           color={"rgba(255,255,255,0.7) "}
+          onPress={()=> {this.props.navigation.navigate("Notifications")}}
         />
         <Icon
           style={styles.menuIcons}
@@ -68,6 +71,9 @@ export default class Dashboard extends Component {
       <View style={styles.dashBoardContainer}>
         <Text style={styles.urduTitle}> خوشحال کسان </Text>
         {/* Crop Growing Guide */}
+        <View style={{ padding: 20,
+    width: "55%",}}>
+      <View >
         <AppButton
           change={() => navigation.navigate("CropGuide")}
           title="Crop Growing Guide"
@@ -76,13 +82,14 @@ export default class Dashboard extends Component {
 
         {/* Place Finder */}
         <AppButton
-          change={() => navigation.navigate("PlaceFinder")}
+          change={() => navigation.navigate("Places")}
           title="Place Finder"
           color="backgroundColor"
         ></AppButton>
+        </View>
         {/* Chatroom */}
         <AppButton
-          change={() => navigation.navigate("Chatroom")}
+          change={() => navigation.navigate("home")}
           title="Chatroom"
           color="backgroundColor"
         ></AppButton>
@@ -99,6 +106,7 @@ export default class Dashboard extends Component {
           color="backgroundColor"
         ></AppButton>
       </View>
+      </View>
       {/* <View style={styles.weatherSettingPic}>
         <Image
           style={styles.weatherPic}
@@ -113,7 +121,7 @@ const styles = StyleSheet.create({
     top: 2,
     alignItems: "center",
     backgroundColor: "black",
-    flex: 0.2,
+    flex: 0.7,
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -126,7 +134,16 @@ const styles = StyleSheet.create({
     // position: "absolute",
     // top: 70,
   },
-
+  loginBtn: {
+    marginTop:10,
+    padding: 20,
+    width: "100%",
+    height:"30%",
+    borderRadius:10,
+    backgroundColor:"red",
+    alignItems:"center",
+    alignContent:"center"
+  },
   weatherPic: {
     width: 650,
     height: 350,
@@ -156,7 +173,7 @@ const styles = StyleSheet.create({
   },
 
   dashBoardContainer: {
-    top: 40,
+    top: 11,
     alignContent: "center",
     alignItems: "center",
   },

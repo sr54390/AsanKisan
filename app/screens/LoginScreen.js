@@ -10,23 +10,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import AppButton from "../components/AppButton";
-import * as firebase from "firebase";
-import {withNavigation} from "react-navigation";
 
-import AuthNavigator from "../navigation/AuthNavigator";
+import * as firebase from "firebase";
+
+
+
 
 
 const { width: WIDTH } = Dimensions.get("window");
 export default class LoginScreen extends Component{
- constructor(props){
-  super(props);
-  this.state={
+ 
+  state={
     email:"",
     password:"",
     errorMessage:null
   } 
-}
+
  
   handleLogin=()=>{
     const {email,password}= this.state;
@@ -37,7 +36,7 @@ export default class LoginScreen extends Component{
     this.props.navigation.navigate("Dashboard")
     console.log(this.props);
   }
-// function LoginScreen({ navigation }) {
+
   render(){
   
     

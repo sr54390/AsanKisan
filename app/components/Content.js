@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    top: 0,
+    top: -40,
   },
 });

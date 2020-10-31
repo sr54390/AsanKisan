@@ -30,6 +30,7 @@ export default class RegisterScreen extends Component{
         displayName:this.state.name
       });
     })
+    this.props.navigation.navigate("Login")
 
   }
 render(){
@@ -132,7 +133,7 @@ render(){
         ></TextInput>
       </View>
       <TouchableOpacity style={styles.loginBtn} onPress={this.handleSignUp}>
-       <Text style={{color:"#FFF",fontWeight:"500"}}>Sign in</Text>
+       <Text style={{color:"#FFF",fontWeight:"500"}}>Register</Text>
      </TouchableOpacity>
      <TouchableOpacity style
      ={{marginTop:10}}  

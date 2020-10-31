@@ -24,7 +24,7 @@ render(){
                 source={require("../../assets/wheat.jpg")}
                 style={{
                 width: "100%",
-                height: 200,}}/>
+                height: 100,}}/>
         
             <View style={styles.container}>
                 <Text style={styles.mainHeadings}>Wheat Guide  </Text>
@@ -39,13 +39,15 @@ render(){
                     placeholderTextColor={"rgba(255,255,255,0.7)"}
                     underlineColorAndroid="transparent"
                     onChangeText={(acre) => this.setState({acre})}
-                    value = {this.state.acre}>       
+                    value = {this.state.acre}
+                    keyboardType = 'numeric'> 
+                       
                 </TextInput>
                 <Text style={{fontSize:20,fontWeight:"bold"}} >Per Acre Output {profitacre} approx</Text>
        
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.Stepbtn} >
+                <TouchableOpacity style={styles.Stepbtn} onPress={()=> {this.props.navigation.navigate("wheatstep2")}} >
                     <Text style={{color:"#FFF",fontWeight:"500"}}> Go to Step 2</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Stepbtn} >

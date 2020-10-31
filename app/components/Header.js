@@ -56,17 +56,20 @@ const styles = StyleSheet.create({
     height: 100,
     alignSelf: "center",
     // marginVertical: 10,
+    top:-30
   },
   tempText: {
     fontFamily: "serif",
     fontSize: 48,
     fontWeight: "bold",
     textAlign: "center",
+    top:-50
   },
   contaryText: {
     fontFamily: "serif",
     fontSize: 20,
     color: "white",
     textAlign: "center",
+    top:-50
   },
 });

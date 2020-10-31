@@ -72,13 +72,13 @@ export default class Weather extends Component {
         source={require("../assets/weatherBackground.jpg")}
       >
         <View style={styles.content}>
-          <TextInput
+          <TextInput style={styles.input}
             placeholder="Enter Country"
             returnKeyLabel={"next"}
             onChangeText={(text) => this.setState({ country: text })}
           />
 
-          <TextInput
+          <TextInput style={styles.input}
             placeholder="Enter Region"
             returnKeyLabel={"next"}
             onChangeText={(text) =>{ this.setState({ region: text }) 
@@ -122,14 +122,14 @@ const styles = StyleSheet.create({
 
   content: {
     flexDirection: "row",
-    top: 50,
+    
     backgroundColor: "red",
     borderBottomColor: "#000000",
     borderBottomWidth: 1,
     justifyContent: "space-between",
   },
   submitButton: {
-    top: 55,
+    top: 10,
     marginLeft: 200,
     elevation: 8,
     backgroundColor: "#009688",
@@ -137,4 +137,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
   },
+  input:{
+    width:"50%"
+  }
 });

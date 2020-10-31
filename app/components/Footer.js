@@ -4,7 +4,7 @@ import { Text, View, StyleSheet } from "react-native";
 export default class Footer extends Component {
   render() {
     return (
-      <View style={{ top: 0 }}>
+      <View style={{ top: -40,marginLeft:10 }}>
         <Text style={styles.maintext}>Additional Info</Text>
         <View style={styles.container}>
           <Text style={styles.mainInfo}>

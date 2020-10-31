@@ -17,26 +17,29 @@ export default class GuideWheatstep3 extends Component{
         return(
             <ImageBackground
             style={styles.background}
-      source={require("../assets/lightback.jpg")}>
+      source={require("../../assets/lightback.jpg")}>
            <Image
-            source={require("../assets/wheat.jpg")}
+            source={require("../../assets/wheat.jpg")}
             style={{
               width: "100%",
-              height: 200,
+              height: 100,
             }}
           />
-        
+       	
+
+
+
             <View style={styles.container}>
                 <Text style={styles.mainHeadings}>Wheat Guide  </Text>
-                <Text style={styles.mainHeadings}>Step 1  </Text>
-                <Text style={styles.mainHeadings}>Make Things Normal </Text>
+                <Text style={styles.mainHeadings}>Step 3  </Text>
+                <Text style={styles.mainHeadings}>Sowing process </Text>
                 <View style={styles.checkboxContainer}>
                     
                     <CheckBox
                    
                       style={styles.checkbox}
                     />
-                    <Text style={styles.label}>Water the Field</Text>
+                    <Text style={styles.label}>Sow the farm with seeds using cultivator, drill(50kg seeds, 1 bag DAP, 1 bag potash, 1 bag nitrophos)</Text>
                   </View>
          {/* powedering */}
          <View style={styles.checkboxContainer}>
@@ -45,7 +48,7 @@ export default class GuideWheatstep3 extends Component{
                    
                       style={styles.checkbox}
                     />
-                    <Text style={styles.label}>Do you like React Native?</Text>
+                    <Text style={styles.label}>Plough tha farm using(suhaga 2 coats)</Text>
                   </View>
                 {/* Seeding */}
                 <View style={styles.checkboxContainer}>
@@ -54,7 +57,7 @@ export default class GuideWheatstep3 extends Component{
        
           style={styles.checkbox}
         />
-        <Text style={styles.label}>Do you like React Native?</Text>
+        <Text style={styles.label}>Plough the farm using rootivator</Text>
       </View>
                 {/* //   value={isSelected}
         //   onValueChange={setSelection} */}
@@ -64,13 +67,13 @@ export default class GuideWheatstep3 extends Component{
        
           style={styles.checkbox}
         />
-        <Text style={styles.label}>Do you like React Native?</Text>
+        <Text style={styles.label}>Wait for approx 21 to 28 days</Text>
       </View>
       <View style={styles.btnContainer}>
       <TouchableOpacity style={styles.Stepbtn} >
-       <Text style={{color:"#FFF",fontWeight:"500"}}> Go to Step 2</Text>
+       <Text style={{color:"#FFF",fontWeight:"500"}} onPress={()=> {this.props.navigation.navigate("wheatstep4")}}> Go to Step 4</Text>
      </TouchableOpacity>
-     <TouchableOpacity style={styles.Stepbtn} >
+     <TouchableOpacity style={styles.Stepbtn}  onPress={()=> {this.props.navigation.navigate("Dashboard")}} >
        <Text style={{color:"#FFF",fontWeight:"500"}}> End Tutorial</Text>
      </TouchableOpacity>
      </View>
@@ -86,7 +89,8 @@ export default class GuideWheatstep3 extends Component{
                   },
                   checkboxContainer: {
                     flexDirection: "row",
-                    marginBottom: 20,
+                    marginRight:20,
+                    marginLeft:20
                   },
                   checkbox: {
                     alignSelf: "center",
@@ -108,7 +112,7 @@ export default class GuideWheatstep3 extends Component{
                   },
                   mainHeadings:{
                       fontSize:18,
-                      margin:20,
+                      margin:10,
                       fontWeight:"bold"
                   }, background: {
                     flex: 1,

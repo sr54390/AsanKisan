@@ -25,7 +25,7 @@ function CropGrowingGuide({ navigation }) {
             title="Wheat Guide"
             color="backgroundColor"
             change={() => {
-              navigation.navigate("WheatGuide");
+              navigation.navigate("wheatstep1");
             }}
           />
         </View>
