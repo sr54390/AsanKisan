@@ -33,6 +33,7 @@ import MapScreen from "../screens/MapScreen";
 import GuideWheatstep1 from "../screens/WheatGuide/GuideWheatstep1";
 import GuideWheatstep2 from "../screens/WheatGuide/GuideWheatstep2";
 import Colors from '../constants/Colors';
+import testing2 from "../screens/testing2"
 const PlacesNavigator = createStackNavigator(
 
 
@@ -56,6 +57,7 @@ wheatstep5: GuideWheatstep5,
 wheatstep6: GuideWheatstep6,
 wheatstep7: GuideWheatstep7,
 wheatstep8: GuideWheatstep8,
+wheatTesting: testing2,
 Places: PlacesListScreen,
     PlaceDetail: PlaceDetailScreen,
     NewPlace: NewPlaceScreen,

@@ -89,7 +89,7 @@ export default class Dashboard extends Component {
         </View>
         {/* Chatroom */}
         <AppButton
-          change={() => navigation.navigate("home")}
+          change={() => navigation.navigate("Chat")}
           title="Chatroom"
           color="backgroundColor"
         ></AppButton>
@@ -135,10 +135,11 @@ const styles = StyleSheet.create({
     // top: 70,
   },
   loginBtn: {
-    marginTop:10,
-    padding: 20,
+    margin:14,
+    marginBottom:5,
+    paddingTop:5,
     width: "100%",
-    height:"30%",
+    height:"100%",
     borderRadius:10,
     backgroundColor:"red",
     alignItems:"center",

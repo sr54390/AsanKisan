@@ -10,34 +10,49 @@ import Shop from "./app/screens/Shop";
 import CropGrowingGuide from "./app/screens/CropGrowingGuide";
 // import WelcomeScreen from "./app/screens/WelcomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import AuthNavigator from "./app/navigation/AuthNavigator";
+import PlacesNavigator from './app/navigation/PlacesNavigator';
 import { createAppContainer } from "react-navigation";
-import Chatroom from "./app/screens/Chatroom";
+
 
 import Weather from "./app/screens/Weather";
-import PlaceFinder from "./app/screens/PlaceFinder";
+
 import * as firebase from "firebase";
 import GuideWheat from "./app/screens/GuideWheat";
 import GuideWheatstep1 from "./app/screens/WheatGuide/GuideWheatstep1";
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
-var firebaseConfig = {
-  apiKey: "AIzaSyCCX0SAXA78YjNdyl1LS88ZgvXw-0Gf_2Q",
-  authDomain: "asankisan-d3d74.firebaseapp.com",
-  databaseURL: "https://asankisan-d3d74.firebaseio.com",
-  projectId: "asankisan-d3d74",
-  storageBucket: "asankisan-d3d74.appspot.com",
-  messagingSenderId: "755521933829",
-  appId: "1:755521933829:web:bf85f419239a9adb95c26c",
-  measurementId: "G-43P9G1HTGW"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+
+
+import placesReducer from './app/store/places-reducer';
+import {init} from './app/helpers/db';
+import testing2 from "./app/screens/testing2";
+
+init()
+	.then(() => {
+		console.log('Initialized database!');
+	})
+	.catch(err => {
+		console.log('Initializing db failed!');
+		console.log(err);
+	});
+
+const rootReducer = combineReducers({
+  	places: placesReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <AuthNavigator />
-    </NavigationContainer>
+    
+    <Provider store={store}>
+    <PlacesNavigator/>
+  </Provider>
+   
+	
     
     
   );

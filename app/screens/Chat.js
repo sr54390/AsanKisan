@@ -5,21 +5,28 @@ import Firebase from "../Firebase";
 
 class Chat extends Component {
   state = {
-    messages: []
+    messages: [],
+    displayName:""
   };
-  componentWillMount() {}
+  componentDidMount(){
+    const {email,displayName}= firebase.auth().currentUser
+    this.setState({email,displayName});
+
+  }
 
   render() {
     return (
       
       <GiftedChat
+      renderUsernameOnMessage={true}
         messages={this.state.messages}
+        
         onSend={message => {
           Firebase.sendMessage(message);
         }}
         user={{
           _id: Firebase.getUid(),
-          name: this.props.navigation.state.params.username
+          name: this.state.displayName
         }}
       />
 

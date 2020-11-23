@@ -67,3 +67,4 @@ class Firebase {
 }
 
 export default new Firebase();
+export const db = firebase.database()

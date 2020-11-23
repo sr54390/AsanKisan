@@ -1,24 +1,68 @@
 
-import React, { Component, useState   } from 'react';
-import {View , Text, StyleSheet,ActivityIndicator,CheckBox, ImageBackground,Image,Dimensions } from "react-native";
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TextInput } from 'react-native-paper';
-// import * as firebase from "firebase";
-const { width: WIDTH } = Dimensions.get("window");
-export default class GuideWheatstep8 extends Component{
-    // // componentDidMount(){
-    // //     firebase.auth().onAuthStateChanged(user => {
-    // //         this.props.navigation.navigate(user ? "App": "Auth");
 
-    // //     });
 
-    // }
-    render(){
-        // const [isSelected, setSelection] = useState(false);
-        return(
-            <ImageBackground
-            style={styles.background}
-      source={require("../../assets/lightback.jpg")}>
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Alert,
+  View,
+  Text,
+  Button,
+  ScrollView,
+  TextInput,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image
+} from 'react-native';
+import CheckBox from 'react-native-check-box';
+import {db} from '../../Firebase';
+
+export default class GuideWheatstep8 extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: {},
+      presentToDo8: '',
+    };
+
+    this.addNewTodo = this.addNewTodo.bind(this);
+    this.clearTodos = this.clearTodos.bind(this);
+  }
+
+  componentDidMount() {
+    db.ref('/WheatGuideStep8').on('value', querySnapShot => {
+      let data = querySnapShot.val() ? querySnapShot.val() : {};
+
+      let todoItems = {...data};
+      console.log(data);
+      this.setState({
+        todos: todoItems,
+      });
+    });
+  }
+
+  addNewTodo() {
+    db.ref('/WheatGuideStep8').push({
+      done: false,
+      todoItem: this.state.presentToDo8,
+    });
+    Alert.alert('Action!', 'A new To-do item was created');
+    this.setState({
+      presentToDo8: '',
+    });
+  }
+
+  clearTodos() {
+    db.ref('/WheatGuideStep8').remove();
+  }
+
+  render() {
+    let todosKeys = Object.keys(this.state.todos);
+
+    return (
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainerStyle}>
            <Image
             source={require("../../assets/wheat.jpg")}
             style={{
@@ -26,91 +70,138 @@ export default class GuideWheatstep8 extends Component{
               height: 100,
             }}
           />
-          
-
-
-
-        
-            <View style={styles.container}>
-                <Text style={styles.mainHeadings}>Wheat Guide</Text>
-                <Text style={styles.mainHeadings}>Step 8</Text>
-                <Text style={styles.mainHeadings}>Harvesting</Text>
-                <View style={styles.checkboxContainer}>
-                    
-                    <CheckBox
-                   
-                      style={styles.checkbox}
-                    />
-                    <Text style={styles.label}>Use harvester to harvest your wheat</Text>
-                  </View>
-                  <View>
-                      <Text>we hope you will even earn more than expected output </Text>
-                      <TextInput style={styles.input}   placeholder={"Kindly Share Your Reviews"}
-          placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent" />
-                  </View>
        
-      <View style={styles.btnContainer}>
-      <TouchableOpacity style={styles.Stepbtn} >
-       <Text style={{color:"#FFF",fontWeight:"500"}} onPress={()=> alert("Hip Hip Hurray Wheat tutorial is End Thank you for Your Patience")}>End Tutorial</Text>
-     </TouchableOpacity>
-     <TouchableOpacity style={styles.Stepbtn} >
-       <Text style={{color:"#FFF",fontWeight:"500"}} onPress={()=> {this.props.navigation.navigate("Dashboard")}}> GO Back to HomeScreen</Text>
-     </TouchableOpacity>
-     </View>
-                </View>
-                </ImageBackground>
-            );
-}}
-            const styles = StyleSheet.create({
-                input: {
-                    width: WIDTH - 55,
-                    height: 45,
-                    borderRadius: 25,
-                    fontSize: 16,
-                    paddingLeft: 45,
-                    backgroundColor: "rgba(0,0,0,0.65)",
-                    color: "rgba(255,255,255,0.7)",
-                    marginHorizontal: 25,
-                  },
-                container: {
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  },
-                  checkboxContainer: {
-                    flexDirection: "row",
-                    marginBottom: 20,
-                  },
-                  checkbox: {
-                    alignSelf: "center",
-                  },
-                  label: {
-                    margin: 8,
-                  },
-                  Stepbtn: {
-                    marginTop:5,
-                    padding: 20,
-                    width: "80%",
-                    borderRadius:10,
-                    backgroundColor:"#000",
-                    alignItems:"center",
-                    alignContent:"center"
-                  },
-                  btnContainer:{
-                      flexDirection:"row"
-                  },
-                  mainHeadings:{
-                      fontSize:18,
-                      margin:10,
-                      fontWeight:"bold"
-                  }, background: {
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  },
+        <View style={styles.containerOK}>
+                 <Text style={styles.mainHeadings}>Wheat Guide  </Text>
+                 <Text style={styles.mainHeadings}>Step 8  </Text>
+                 <Text style={styles.mainHeadings}>Harvesting  </Text>
+</View>
+        {/* <TextInput
+          placeholder="Add new Todo"
+          value={this.state.presentToDo}
+          style={styles.textInput}
+          onChangeText={e => {
+            this.setState({
+              presentToDo8: e,
             });
-        
-      
-    
+          }}
+          onSubmitEditing={this.addNewTodo}
+        /> */}
+ <View>
+          {todosKeys.length > 0 ? (
+            todosKeys.map(key => (
+              <ToDoItem
+                key={key}
+                id={key}
+                todoItem={this.state.todos[key]}
+              />
+            ))
+          ) : (
+            <Text>No todo item</Text>
+          )}
+        </View>
+        {/* <View style={{flexDirection:"row"}}>
+        <Button
+          title="Done"
+          onPress={this.addNewTodo}
+          color="lightgreen"
+        />
 
+        
+          <Button title="Undone" onPress={this.clearTodos} color="red" />
+        
+        </View> */}
+         <View style={styles.btnContainer}>
+       <TouchableOpacity style={styles.Stepbtn} >
+        <Text style={{color:"#FFF",fontWeight:"500"}} onPress={()=> Alert.alert("Hip Hip Hurray","You Have Finished your Wheat Guide Tutorial")}> Finsih</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.Stepbtn}  onPress={()=> {this.props.navigation.navigate("Dashboard")}} >
+        <Text style={{color:"#FFF",fontWeight:"500"}}> End Tutorial</Text>
+      </TouchableOpacity>
+      </View>
+      </ScrollView>
+    );
+  }
+}
+
+const ToDoItem = ({todoItem: {todoItem: name, done}, id}) => {
+  const [doneState, setDone] = useState(done);
+
+  const onCheck = () => {
+    setDone(!doneState);
+    db.ref('/WheatGuideStep8').update({
+      [id]: {
+        todoItem: name,
+        done: !doneState,
+      },
+    });
+  };
+  return (
+    <View style={styles.todoItem}>
+      <CheckBox
+        checkBoxColor="skyblue"
+        onClick={onCheck}
+        isChecked={doneState}
+        // disabled={doneState}
+      />
+      <Text style={[styles.todoText, {opacity: doneState ? 0.2 : 1}]}>
+        {name}
+      </Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#afafaf',
+    width: '80%',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginVertical: 20,
+    fontSize: 20,
+  },
+  todoItem: {
+    flexDirection: 'row',
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  todoText: {
+    borderColor: '#afafaf',
+    paddingHorizontal: 5,
+    paddingVertical: 7,
+    borderWidth: 1,
+    borderRadius: 5,
+    marginRight: 10,
+    minWidth: '50%',
+    textAlign: 'center',
+    
+  },
+  Stepbtn: {
+                        marginTop:5,
+                        padding: 20,
+                        width: "80%",
+                        borderRadius:10,
+                        backgroundColor:"#000",
+                        alignItems:"center",
+                        alignContent:"center"
+                      },
+                      containerOK: {
+                                            flex: 1,
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                          },
+                                          mainHeadings:{
+                                                                  fontSize:18,
+                                                                  margin:10,
+                                                                  fontWeight:"bold"
+                                                              },
+});

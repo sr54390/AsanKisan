@@ -55,6 +55,7 @@ export default class Weather extends Component {
     await this._getWeatherReport();
   }
 
+
   render() {
     if (this.state.report.list === null || this.state.report.detail === null) {
       return (
@@ -98,6 +99,7 @@ export default class Weather extends Component {
             Submit
           </Text>
           </TouchableOpacity>
+          
          
         </View>
         <View style={styles.title}>
