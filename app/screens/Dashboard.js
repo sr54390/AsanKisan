@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ImageBackground,
   Dimensions,
+  TouchableOpacityBase,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { ceil } from "react-native-reanimated";
@@ -33,6 +34,10 @@ export default class Dashboard extends Component {
     this.props.navigation.navigate("Welcome")
 
   }
+
+
+ 
+
   render(){
     const { navigation } = this.props;
   return (
@@ -42,11 +47,9 @@ export default class Dashboard extends Component {
       style={styles.background}
     >
       <View style={styles.topNavigation}><Text style={{fontSize:18,fontFamily:"Roboto",marginLeft:10,color:"#fff"}}>{this.state.displayName}</Text>
-      <TouchableOpacity style={styles.loginBtn} onPress={this.signOutUser}><Text style={{fontSize:18,marginLeft:10}}>Logout</Text></TouchableOpacity>
-      </View>
-      <View style={styles.topNavigation}>
-        <Text style={styles.mainTitle}> Asan Kisan</Text>
-
+     
+      
+     
         <Icon
           style={styles.menuIcons}
           name={"md-notifications"}
@@ -54,7 +57,7 @@ export default class Dashboard extends Component {
           color={"rgba(255,255,255,0.7) "}
           onPress={()=> {this.props.navigation.navigate("Notifications")}}
         />
-        <Icon
+        {/* <Icon
           style={styles.menuIcons}
           name={"md-menu"}
           size={28}
@@ -65,48 +68,56 @@ export default class Dashboard extends Component {
           name={"md-search"}
           size={28}
           color={"rgba(255,255,255,0.7) "}
-        />
+        /> */}
       </View>
+      <View ><Text style={{fontSize:55,color:"#000",textAlign:"center"}}>آسان کسان</Text></View>
 
-      <View style={styles.dashBoardContainer}>
-        <Text style={styles.urduTitle}> خوشحال کسان </Text>
-        {/* Crop Growing Guide */}
-        <View style={{ padding: 20,
-    width: "55%",}}>
-      <View >
-        <AppButton
-          change={() => navigation.navigate("CropGuide")}
-          title="Crop Growing Guide"
-          color="backgroundColor"
-        ></AppButton>
+        <View style={{flexDirection:"row",marginLeft:35}}>
 
-        {/* Place Finder */}
-        <AppButton
-          change={() => navigation.navigate("Places")}
-          title="Place Finder"
-          color="backgroundColor"
-        ></AppButton>
-        </View>
-        {/* Chatroom */}
-        <AppButton
-          change={() => navigation.navigate("Chat")}
-          title="Chatroom"
-          color="backgroundColor"
-        ></AppButton>
-        {/*Weather*/}
-        <AppButton
-          change={() => navigation.navigate("Weather")}
-          title="Weather"
-          color="backgroundColor"
-        ></AppButton>
-        {/* Shop */}
-        <AppButton
-          change={() => navigation.navigate("Shop")}
-          title="Shop"
-          color="backgroundColor"
-        ></AppButton>
-      </View>
-      </View>
+      <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("CropGuide")}}>
+      <Icon name={"ios-book"} size={56} color={"#000"}/> 
+       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Crop Guides</Text>
+     </TouchableOpacity>
+
+
+     <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("Places")}}>
+     <Icon name={"ios-search"} size={56} color={"#000"}/> 
+       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Place Finder</Text>
+     </TouchableOpacity>
+
+
+     </View>
+
+     <View style={{flexDirection:"row",marginLeft:35}}>
+
+
+      <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("chatScreen")}}>
+      <Icon name={"logo-whatsapp"} size={56} color={"#000"}/>
+       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Chatroom</Text>
+     </TouchableOpacity>
+
+
+     <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("Weather")}}>
+     <Icon name={"ios-partly-sunny"} size={56} color={"#000"}/>
+       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Weather</Text>
+     </TouchableOpacity>
+
+
+     </View>
+
+        <View style={{flexDirection:"row",marginLeft:35}}>
+      <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("Shop")}}>
+      <Icon name={"md-cart"} size={56} color={"#000"}/>
+       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Shop</Text>
+     </TouchableOpacity>
+     <TouchableOpacity style={styles.dashBtn} onPress={this.signOutUser}>
+     <Icon name={"md-power"} size={56} color={"#000"}/>
+       <Text  style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Logout</Text></TouchableOpacity>
+     
+     </View>
+
+
+      
       {/* <View style={styles.weatherSettingPic}>
         <Image
           style={styles.weatherPic}
@@ -118,10 +129,10 @@ export default class Dashboard extends Component {
 }}
 const styles = StyleSheet.create({
   topNavigation: {
-    top: 2,
+    top: -2,
     alignItems: "center",
     backgroundColor: "black",
-    flex: 0.7,
+    flex: 0.5,
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -185,7 +196,7 @@ const styles = StyleSheet.create({
   },
   menuIcons: {
     position: "relative",
-    top: 8,
+    top: 1,
     left: 37,
   },
   input: {
@@ -201,5 +212,18 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 10,
     alignItems: "center",
+  },
+  dashBtn: {
+
+
+    width: 160,
+    height:150,
+    borderRadius:12,
+    backgroundColor:"rgba(255,255,255,0.7)",
+    alignItems:"center",
+    alignContent:"center",
+    margin:10  ,
+   paddingTop:18,
+    right:34
   },
 });

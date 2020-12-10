@@ -43,7 +43,7 @@ render(){
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
-          source={require("../assets/logoKisan.png")}
+          source={require("../assets/asanLogo.png")}
         />
       </View>
       <View><Text style={styles.errorMessage}>{this.state.errorMessage}</Text></View>
@@ -58,7 +58,7 @@ render(){
           style={styles.input}
           placeholder={"Username"}
           placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid="rgba(255,255,255,0.7)"
           onChangeText={name => this.setState({name})}
           value = {this.state.name}
         ></TextInput>
@@ -75,7 +75,7 @@ render(){
           style={styles.input}
           placeholder={"Email"}
           placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid="rgba(255,255,255,0.7)"
           onChangeText={email => this.setState({email})}
           value = {this.state.email}
         ></TextInput>
@@ -92,7 +92,7 @@ render(){
           placeholder={"Password"}
           secureTextEntry={true}
           placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid="rgba(255,255,255,0.7)"
           onChangeText={password => this.setState({password})}
           value = {this.state.password}
         ></TextInput>
@@ -101,12 +101,12 @@ render(){
         </TouchableOpacity>
       </View>
       <View style={styles.inputContainer}>
-        <Icon
+        {/* <Icon
           style={styles.inputIcons}
           name={"ios-lock"}
           size={28}
           color={"rgba(255,255,255,0.7) "}
-        />
+        /> */}
         {/* <TextInput
           style={styles.input}
           placeholder={"Reconfrim Password"}
@@ -114,9 +114,9 @@ render(){
           placeholderTextColor={"rgba(255,255,255,0.7)"}
           underlineColorAndroid="transparent"
         ></TextInput> */}
-        <TouchableOpacity style={styles.btnEye}>
+        {/* <TouchableOpacity style={styles.btnEye}>
           <Icon name={"ios-eye"} size={26} color={"rgba(255,255,255,0.7) "} />
-        </TouchableOpacity>
+        </TouchableOpacity> */} 
       </View>
       <View style={styles.inputContainer}>
         <Icon
@@ -129,10 +129,16 @@ render(){
           style={styles.input}
           placeholder={"Phone Number"}
           placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid="rgba(255,255,255,0.7)"
         ></TextInput>
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={this.handleSignUp}>
+      <TouchableOpacity style={{ marginTop:20,
+    padding: 20,
+    width: "80%",
+    borderRadius:30,
+    backgroundColor:"brown",
+    alignItems:"center",
+    alignContent:"center"}} onPress={this.handleSignUp}>
        <Text style={{color:"#FFF",fontWeight:"500"}}>Register</Text>
      </TouchableOpacity>
      <TouchableOpacity style
@@ -151,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 100,
+    width: 150,
     height: 100,
   },
   logoContainer: {
@@ -163,7 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     fontSize: 16,
     paddingLeft: 45,
-    backgroundColor: "rgba(0,0,0,0.65)",
+    // backgroundColor: "rgba(0,0,0,0.65)",
     color: "rgba(255,255,255,0.7)",
     marginHorizontal: 25,
   },
@@ -181,8 +187,13 @@ const styles = StyleSheet.create({
     right: 37,
   },
   loginBtn: {
+    marginTop:80,
     padding: 20,
     width: "80%",
+    borderRadius:40,
+    backgroundColor:"brown",
+    alignItems:"center",
+    alignContent:"center"
   },
   noAccount: {
     color: "#fff",

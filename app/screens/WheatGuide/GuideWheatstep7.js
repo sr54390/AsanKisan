@@ -159,6 +159,8 @@ const styles = StyleSheet.create({
   contentContainerStyle: {
     alignItems: 'center',
   },
+  btnContainer:{flexDirection:"row"},
+
 
   textInput: {
     borderWidth: 1,
@@ -188,11 +190,13 @@ const styles = StyleSheet.create({
   Stepbtn: {
                         marginTop:5,
                         padding: 20,
-                        width: "80%",
+                        width: "40%",
                         borderRadius:10,
-                        backgroundColor:"#000",
+                        backgroundColor:"brown",
                         alignItems:"center",
-                        alignContent:"center"
+                        alignContent:"center",
+                        justifyContent:"space-between",
+                        margin:10
                       },
                       containerOK: {
                                             flex: 1,

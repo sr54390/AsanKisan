@@ -43,17 +43,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "serif",
     marginTop: 10,
+    color:"#fff"
   },
   mainInfo: {
     fontFamily: "serif",
     fontSize: 15,
     fontWeight: "bold",
-    color: "#333",
+    color: "#fff",
   },
   ainfo: {
     fontFamily: "serif",
     fontSize: 15,
     fontWeight: "400",
-    color: "black",
+    color: "#fff",
   },
 });

@@ -12,11 +12,19 @@ import {
   TextInput,
   ActivityIndicator,
   TouchableOpacity,
-  Image
+  Image,Dimensions
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import {db} from '../../Firebase';
+import Weather from '../Weather';
 import Firebase from '../../Firebase';
+import Header from '../../components/Header';
+import Weather4Guides from '../Weather4Guides';
+import Icon from "react-native-vector-icons/Ionicons";
+import { WebView } from "react-native-webview";
+import ProgressBarAnimated from 'react-native-progress-bar-animated';
+// import Sound from 'react-native-sound'; 
+const { width: WIDTH } = Dimensions.get("window");
 
 export default class GuideWheatstep2 extends React.Component {
   constructor() {
@@ -30,6 +38,51 @@ export default class GuideWheatstep2 extends React.Component {
     this.clearTodos = this.clearTodos.bind(this);
   }
 
+
+
+
+  // audio = () =>{
+  //   Sound.setCategory('Playback');
+   
+  //   var mySound = new Sound('da.mp3',Sound.MAIN_BUNDLE,(error)=>{
+  //     if(error){
+  //     console.log('Error loading sound: ' + error);
+  //     return;
+  //     }else{
+  //     mySound.play((success)=>{
+  //     if(success){
+  //     console.log('Sound playing')
+  //     }else{
+  //     console.log('Issue playing file');
+  //     }
+  //     })
+  //     }
+  //     });
+  //     mySound.setVolume(0.9);
+  //     mySound.release();
+  
+  
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   currentUser(){
     firebase.auth().createUserWithEmailAndPassword.then(data => {
       console.log("User:",data.user.uid);
@@ -37,6 +90,21 @@ export default class GuideWheatstep2 extends React.Component {
     });
 
   }
+
+  onNextpressing(){
+
+    this.props.navigation.navigate("wheatstep2");
+    db.ref.child("./currentScreen").setValue("3");
+      
+}
+onHomePage(){
+    this.props.navigation.navigate("Dashboard");
+    db.ref.child("./currentScreen").setValue("2");
+      Alert.alert('Data has been Saved');
+     
+}
+
+
   componentDidMount() {
     db.ref('/WheatGuideStep2').on('value', querySnapShot => {
       let data = querySnapShot.val() ? querySnapShot.val() : {};
@@ -67,9 +135,12 @@ export default class GuideWheatstep2 extends React.Component {
 
   render() {
     let todosKeys = Object.keys(this.state.todos);
+    const barWidth = Dimensions.get('screen').width - 30;
 
     return (
+      
       <ScrollView
+      
         style={styles.container}
         contentContainerStyle={styles.contentContainerStyle}>
            <Image
@@ -81,6 +152,15 @@ export default class GuideWheatstep2 extends React.Component {
           />
        
         <View style={styles.containerOK}>
+          
+        <ProgressBarAnimated
+                 
+                 width={barWidth}
+                 value= "25"
+                 backgroundColorOnComplete="#6CC644"
+               />
+               <Text style={{fontWeight:"bold"}}>26% Completed</Text>
+          <Weather4Guides/>
                  <Text style={styles.mainHeadings}>Wheat Guide  </Text>
                  <Text style={styles.mainHeadings}>Step 2  </Text>
                  <Text style={styles.mainHeadings}>Making fields ready for cultivation  </Text>
@@ -123,9 +203,9 @@ export default class GuideWheatstep2 extends React.Component {
         </View> */}
          <View style={styles.btnContainer}>
        <TouchableOpacity style={styles.Stepbtn} >
-        <Text style={{color:"#FFF",fontWeight:"500"}} onPress={()=> {this.props.navigation.navigate("wheatstep3")}}> Go to Step 3</Text>
+        <Text style={{color:"#FFF",fontWeight:"500"}} onPress={()=> this.onNextpressing()}> Go to Step 3</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.Stepbtn}  onPress={()=> {this.props.navigation.navigate("Dashboard")}} >
+      <TouchableOpacity style={styles.Stepbtn}  onPress={()=> this.onHomePage()} >
         <Text style={{color:"#FFF",fontWeight:"500"}}> End Tutorial</Text>
       </TouchableOpacity>
       </View>
@@ -168,11 +248,49 @@ const ToDoItem = ({todoItem: {todoItem: name, done}, id}) => {
       <Text style={[styles.todoText, {opacity: doneState ? 0.2 : 1}]}>
         {name}
       </Text>
+      {/* <TouchableOpacity >
+      <Icon
+          style={{left:10}}
+          name={"ios-play"}
+          size={28}
+          color={"black"}
+          // onPress={()=>this.PlayLocalSoundFile()}
+        />
+      </TouchableOpacity> */}
+
+{/* <TouchableOpacity
+          style={{ marginTop: 50 }}
+          onPress={() => {
+            this.webview.injectJavaScript(
+              'document.getElementById("audio").play();'
+            );
+          }}
+        >
+          <Icon
+          style={{left:10}}
+          name={"ios-play"}
+          size={28}
+          color={"black"}
+          />
+        </TouchableOpacity> 
+        <WebView
+          ref={(ref) => (this.webview = ref)}
+          originWhitelist={["*"]}
+          mediaPlaybackRequiresUserAction={true} // Allow autoplay
+          useWebKit={true}
+          source={{
+            html:
+              '<audio id="audio" > <source src="https://go.transportili.app/static/sounds/ring.mp3" type="audio/mp3" /> </audio>',
+          }}
+        /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  btnContainer:{
+    flexDirection:"row"
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',
@@ -209,11 +327,13 @@ const styles = StyleSheet.create({
   Stepbtn: {
                         marginTop:5,
                         padding: 20,
-                        width: "80%",
+                        width: "40%",
                         borderRadius:10,
-                        backgroundColor:"#000",
+                        backgroundColor:"brown",
                         alignItems:"center",
-                        alignContent:"center"
+                        alignContent:"center",
+                        justifyContent:"space-between",
+                        margin:10
                       },
                       containerOK: {
                                             flex: 1,
@@ -222,7 +342,7 @@ const styles = StyleSheet.create({
                                           },
                                           mainHeadings:{
                                                                   fontSize:18,
-                                                                  margin:10,
+                                                                  // margin:10,
                                                                   fontWeight:"bold"
                                                               },
 });

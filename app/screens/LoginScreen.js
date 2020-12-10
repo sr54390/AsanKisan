@@ -45,7 +45,7 @@ export default class LoginScreen extends Component{
       style={styles.background}
       source={require("../assets/background.jpg")}
     >
-      <Image style={styles.logo} source={require("../assets/logoKisan.png")} />
+      <Image style={styles.logo} source={require("../assets/asanLogo.png")} />
   <View><Text style={styles.errorMessage}>{this.state.errorMessage}</Text></View>
       <View style={styles.inputContainer}>
         <Icon
@@ -58,7 +58,7 @@ export default class LoginScreen extends Component{
           style={styles.input}
           placeholder={"Email"}
           placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid="rgba(255,255,255,0.7)"
           onChangeText={email => this.setState({email})}
           value = {this.state.email}
         ></TextInput>
@@ -75,7 +75,7 @@ export default class LoginScreen extends Component{
           placeholder={"Password"}
           secureTextEntry={true}
           placeholderTextColor={"rgba(255,255,255,0.7)"}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid="rgba(255,255,255,0.7)"
           onChangeText={password => this.setState({password})}
           value = {this.state.password}
         ></TextInput>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 100,
+    width: 150,
     height: 100,
     position: "absolute",
     top: 70,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     fontSize: 16,
     paddingLeft: 45,
-    backgroundColor: "rgba(0,0,0,0.65)",
+    // backgroundColor: "rgba(0,0,0,0.65)",
     color: "rgba(255,255,255,0.7)",
     marginHorizontal: 25,
   },
@@ -136,11 +136,11 @@ color:"red"
     right: 37,
   },
   loginBtn: {
-    marginTop:10,
+    marginTop:80,
     padding: 20,
     width: "80%",
-    borderRadius:10,
-    backgroundColor:"#000",
+    borderRadius:30,
+    backgroundColor:"brown",
     alignItems:"center",
     alignContent:"center"
   },

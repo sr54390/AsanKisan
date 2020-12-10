@@ -34,6 +34,7 @@ import GuideWheatstep1 from "../screens/WheatGuide/GuideWheatstep1";
 import GuideWheatstep2 from "../screens/WheatGuide/GuideWheatstep2";
 import Colors from '../constants/Colors';
 import testing2 from "../screens/testing2"
+import LahoreChat from "../screens/LahoreChat";
 const PlacesNavigator = createStackNavigator(
 
 
@@ -66,7 +67,9 @@ Places: PlacesListScreen,
     
    Notifications: Notifications,
    home:Home,
-   Chat:Chat
+   Chat:Chat,
+   LahoreChat:LahoreChat,
+   chatScreen:chatScreen
 },
 {
   defaultNavigationOptions: {
