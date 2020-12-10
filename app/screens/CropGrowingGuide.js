@@ -4,15 +4,15 @@ import AppButton from "../components/AppButton";
 import firebase from '../Firebase';
 
 export default class  CropGrowingGuide extends Component{
-  state={
-    screen:""
-  }
+  // state={
+  //   screen:""
+  // }
 
 
-  componentDidMount(){
-    const {screen}= firebase.database.ref('./currentScreen');
-    this.setState({screen});
-  }
+  // componentDidMount(){
+  //   const {screen}= firebase.database.ref('./currentScreen');
+  //   this.setState({screen});
+  // }
   
   render(){
   return (

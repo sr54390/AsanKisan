@@ -93,14 +93,14 @@ export default class GuideWheatstep2 extends React.Component {
 
   onNextpressing(){
 
-    this.props.navigation.navigate("wheatstep2");
-    db.ref.child("./currentScreen").setValue("3");
+    this.props.navigation.navigate("wheatstep3");
+    // db.ref.child("./currentScreen").setValue("3");
       
 }
 onHomePage(){
     this.props.navigation.navigate("Dashboard");
-    db.ref.child("./currentScreen").setValue("2");
-      Alert.alert('Data has been Saved');
+    // db.ref.child("./currentScreen").setValue("2");
+    //   Alert.alert('Data has been Saved');
      
 }
 

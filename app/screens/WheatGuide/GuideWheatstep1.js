@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput } from 'react-native-paper';
 // import * as firebase from "firebase";
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
-import { db } from '../../Firebase';
+// import { db } from '../../Firebase';
 const { width: WIDTH } = Dimensions.get("window");
 
 
@@ -21,19 +21,19 @@ state={
     onNextpressing(){
 
         this.props.navigation.navigate("wheatstep2");
-        db.ref('/currentScreen').push({
-            screen: 2
+        // db.ref('/currentScreen').push({
+        //     screen: 2
             
-          });
+        //   });
           
     }
     onHomePage(){
         this.props.navigation.navigate("Dashboard");
-        db.ref('/currentScreen').push({
-            screen: 1
+        // db.ref('/currentScreen').push({
+        //     screen: 1
             
-          });
-          Alert.alert('Data has been Saved');
+        //   });
+        //   Alert.alert('Data has been Saved');
          
     }
 
