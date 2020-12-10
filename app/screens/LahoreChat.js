@@ -5,39 +5,35 @@ import Firebase from "../Firebase";
 
 class LahoreChat extends Component {
   state = {
-    Lahoremessages: [],
-    displayName:""
+    messages: [],
+    displayName: "",
   };
-  componentDidMount(){
-    const {email,displayName}= firebase.auth().currentUser
-    this.setState({email,displayName});
-
+  componentDidMount() {
+    const { email, displayName } = firebase.auth().currentUser;
+    this.setState({ email, displayName });
   }
 
   render() {
     return (
-      
       <GiftedChat
-      renderUsernameOnMessage={true}
-      Lahoremessages={this.state.Lahoremessages}
-        
-        onSend={message => {
+        renderUsernameOnMessage={true}
+        messages={this.state.messages}
+        onSend={(message) => {
           Firebase.sendMessage(message);
         }}
         user={{
           _id: Firebase.getUid(),
-          name: this.state.displayName
+          name: this.state.displayName,
         }}
       />
-
     );
   }
-  componentDidMount() {
-    console.ignoredYellowBox = ['Setting a timer'];
-    Firebase.loadMessages(Lahoremessage => {
-      this.setState(previousState => {
+  async componentDidMount() {
+    console.ignoredYellowBox = ["Setting a timer"];
+    await Firebase.loadMessagesLahore((message) => {
+      this.setState((previousState) => {
         return {
-            Lahoremessages: GiftedChat.append(previousState.Lahoremessages, Lahoremessage)
+          messages: GiftedChat.append(previousState.messages, message),
         };
       });
     });

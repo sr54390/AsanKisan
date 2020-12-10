@@ -15,49 +15,83 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AppButton from "../components/AppButton";
 import * as firebase from "firebase";
 
-
 const { width: WIDTH } = Dimensions.get("window");
+import * as Location from "expo-location";
 
 export default class Dashboard extends Component {
-  state={
-    displayName:"",
-    email:""
-  }
-  componentDidMount(){
-    const {email,displayName}= firebase.auth().currentUser
-    this.setState({email,displayName});
+  state = {
+    displayName: "",
+    email: "",
+    lat: 0,
+    long: 0,
+  };
+  async componentDidMount() {
+    const { email, displayName } = firebase.auth().currentUser;
+    this.setState({ email, displayName });
+    const location = await Location.getCurrentPositionAsync({
+      timeout: 5000,
+    });
 
+    this.setState({
+      lat: location.coords.latitude,
+      long: location.coords.longitude,
+    });
   }
-  signOutUser = ()=>{
-
+  signOutUser = () => {
     firebase.auth().signOut();
-    this.props.navigation.navigate("Welcome")
+    this.props.navigation.navigate("Welcome");
+  };
 
-  }
-
-
- 
-
-  render(){
+  render() {
     const { navigation } = this.props;
-  return (
-    
-    <ImageBackground
-      source={require("../assets/dashboard.jpg")}
-      style={styles.background}
-    >
-      <View style={styles.topNavigation}><Text style={{fontSize:18,fontFamily:"Roboto",marginLeft:10,color:"#fff"}}>{this.state.displayName}</Text>
-     
-      
-     
-        <Icon
-          style={styles.menuIcons}
-          name={"md-notifications"}
-          size={28}
-          color={"rgba(255,255,255,0.7) "}
-          onPress={()=> {this.props.navigation.navigate("Notifications")}}
-        />
-        {/* <Icon
+    return (
+      <ImageBackground
+        source={require("../assets/dashboard.jpg")}
+        style={styles.background}
+      >
+        <View style={styles.topNavigation}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: "Roboto",
+              marginLeft: 10,
+              color: "#fff",
+            }}
+          >
+            {this.state.displayName}
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: "Roboto",
+              marginLeft: 10,
+              color: "#fff",
+            }}
+          >
+            {this.state.lat >= 31 &&
+            this.state.lat < 32 &&
+            this.state.long >= 74 &&
+            this.state.long < 75
+              ? "Lahore"
+              : this.state.lat >= 24 &&
+                this.state.lat < 25 &&
+                this.state.long >= 67 &&
+                this.state.long < 68
+              ? "Krachi"
+              : "Rawalpindi"}
+          </Text>
+
+          <Icon
+            style={styles.menuIcons}
+            name={"md-notifications"}
+            size={28}
+            color={"rgba(255,255,255,0.7) "}
+            onPress={() => {
+              this.props.navigation.navigate("Notifications");
+            }}
+          />
+          {/* <Icon
           style={styles.menuIcons}
           name={"md-menu"}
           size={28}
@@ -69,64 +103,137 @@ export default class Dashboard extends Component {
           size={28}
           color={"rgba(255,255,255,0.7) "}
         /> */}
-      </View>
-      <View ><Text style={{fontSize:55,color:"#000",textAlign:"center"}}>آسان کسان</Text></View>
+        </View>
+        <View>
+          <Text style={{ fontSize: 55, color: "#000", textAlign: "center" }}>
+            آسان کسان
+          </Text>
+        </View>
 
-        <View style={{flexDirection:"row",marginLeft:35}}>
+        <View style={{ flexDirection: "row", marginLeft: 35 }}>
+          <TouchableOpacity
+            style={styles.dashBtn}
+            onPress={() => {
+              this.props.navigation.navigate("CropGuide");
+            }}
+          >
+            <Icon name={"ios-book"} size={56} color={"#000"} />
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 25,
+              }}
+            >
+              Crop Guides
+            </Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("CropGuide")}}>
-      <Icon name={"ios-book"} size={56} color={"#000"}/> 
-       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Crop Guides</Text>
-     </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.dashBtn}
+            onPress={() => {
+              this.props.navigation.navigate("Places");
+            }}
+          >
+            <Icon name={"ios-search"} size={56} color={"#000"} />
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 25,
+              }}
+            >
+              Place Finder
+            </Text>
+          </TouchableOpacity>
+        </View>
 
+        <View style={{ flexDirection: "row", marginLeft: 35 }}>
+          <TouchableOpacity
+            style={styles.dashBtn}
+            onPress={() => {
+              this.props.navigation.navigate("chatScreen");
+            }}
+          >
+            <Icon name={"logo-whatsapp"} size={56} color={"#000"} />
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 25,
+              }}
+            >
+              Chatroom
+            </Text>
+          </TouchableOpacity>
 
-     <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("Places")}}>
-     <Icon name={"ios-search"} size={56} color={"#000"}/> 
-       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Place Finder</Text>
-     </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.dashBtn}
+            onPress={() => {
+              this.props.navigation.navigate("Weather");
+            }}
+          >
+            <Icon name={"ios-partly-sunny"} size={56} color={"#000"} />
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 25,
+              }}
+            >
+              Weather
+            </Text>
+          </TouchableOpacity>
+        </View>
 
+        <View style={{ flexDirection: "row", marginLeft: 35 }}>
+          <TouchableOpacity
+            style={styles.dashBtn}
+            onPress={() => {
+              this.props.navigation.navigate("Shop");
+            }}
+          >
+            <Icon name={"md-cart"} size={56} color={"#000"} />
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 25,
+              }}
+            >
+              Shop
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.dashBtn} onPress={this.signOutUser}>
+            <Icon name={"md-power"} size={56} color={"#000"} />
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "bold",
+                textAlign: "center",
+                paddingTop: 25,
+              }}
+            >
+              Logout
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-     </View>
-
-     <View style={{flexDirection:"row",marginLeft:35}}>
-
-
-      <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("chatScreen")}}>
-      <Icon name={"logo-whatsapp"} size={56} color={"#000"}/>
-       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Chatroom</Text>
-     </TouchableOpacity>
-
-
-     <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("Weather")}}>
-     <Icon name={"ios-partly-sunny"} size={56} color={"#000"}/>
-       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Weather</Text>
-     </TouchableOpacity>
-
-
-     </View>
-
-        <View style={{flexDirection:"row",marginLeft:35}}>
-      <TouchableOpacity style={styles.dashBtn} onPress={()=> {this.props.navigation.navigate("Shop")}}>
-      <Icon name={"md-cart"} size={56} color={"#000"}/>
-       <Text style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Shop</Text>
-     </TouchableOpacity>
-     <TouchableOpacity style={styles.dashBtn} onPress={this.signOutUser}>
-     <Icon name={"md-power"} size={56} color={"#000"}/>
-       <Text  style={{color:"#000",fontWeight:"bold",textAlign:"center",paddingTop:25}}>Logout</Text></TouchableOpacity>
-     
-     </View>
-
-
-      
-      {/* <View style={styles.weatherSettingPic}>
+        {/* <View style={styles.weatherSettingPic}>
         <Image
           style={styles.weatherPic}
           source={require("../assets/Weather.jpg")}
         />
       </View> */}
-    </ImageBackground>
-  );
-}}
+      </ImageBackground>
+    );
+  }
+}
 const styles = StyleSheet.create({
   topNavigation: {
     top: -2,
@@ -146,15 +253,15 @@ const styles = StyleSheet.create({
     // top: 70,
   },
   loginBtn: {
-    margin:14,
-    marginBottom:5,
-    paddingTop:5,
+    margin: 14,
+    marginBottom: 5,
+    paddingTop: 5,
     width: "100%",
-    height:"100%",
-    borderRadius:10,
-    backgroundColor:"red",
-    alignItems:"center",
-    alignContent:"center"
+    height: "100%",
+    borderRadius: 10,
+    backgroundColor: "red",
+    alignItems: "center",
+    alignContent: "center",
   },
   weatherPic: {
     width: 650,
@@ -214,16 +321,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dashBtn: {
-
-
     width: 160,
-    height:150,
-    borderRadius:12,
-    backgroundColor:"rgba(255,255,255,0.7)",
-    alignItems:"center",
-    alignContent:"center",
-    margin:10  ,
-   paddingTop:18,
-    right:34
+    height: 150,
+    borderRadius: 12,
+    backgroundColor: "rgba(255,255,255,0.7)",
+    alignItems: "center",
+    alignContent: "center",
+    margin: 10,
+    paddingTop: 18,
+    right: 34,
   },
 });

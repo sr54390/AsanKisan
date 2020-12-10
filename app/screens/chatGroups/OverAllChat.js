@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
-import Firebase from "../Firebase";
+import Firebase from "../../Firebase";
 
-class Chat extends Component {
+class OverAllChat extends Component {
   state = {
     messages: [],
     displayName: "",
@@ -30,7 +29,7 @@ class Chat extends Component {
   }
   async componentDidMount() {
     console.ignoredYellowBox = ["Setting a timer"];
-    await Firebase.loadMessagesIslamabad((message) => {
+    await Firebase.loadMessagesOverAll((message) => {
       this.setState((previousState) => {
         return {
           messages: GiftedChat.append(previousState.messages, message),
@@ -44,4 +43,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default OverAllChat;
