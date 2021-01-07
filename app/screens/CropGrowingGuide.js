@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  ImageBackground,
 } from "react-native";
 import AppButton from "../components/AppButton";
 import firebase from "../Firebase";
@@ -22,7 +23,7 @@ export default class CropGrowingGuide extends Component {
   }
 
   componentDidMount() {
-    console.log("hello my name is hassan");
+   
   }
 
   // componentDidMount(){
@@ -32,7 +33,9 @@ export default class CropGrowingGuide extends Component {
 
   render() {
     return (
-      <View>
+      <ImageBackground
+      source={require("../assets/cropsMainBack.jpg")}
+        style={styles.background}>
         <View>
           <DropDownPicker
             items={[
@@ -42,8 +45,8 @@ export default class CropGrowingGuide extends Component {
                 icon: () => <Icon name="flag" size={18} color="#900" />,
               },
               {
-                label: "Islamabad",
-                value: "islamabad",
+                label: "Sargodha",
+                value: "sargodha",
                 icon: () => <Icon name="flag" size={18} color="#900" />,
               },
               {
@@ -52,13 +55,13 @@ export default class CropGrowingGuide extends Component {
                 icon: () => <Icon name="flag" size={18} color="#900" />,
               },
               {
-                label: "Rawalpindi",
-                value: "rawalpindi",
+                label: "Gujranwala",
+                value: "Gujranwala",
                 icon: () => <Icon name="flag" size={18} color="#900" />,
               },
               {
-                label: "Karachi",
-                value: "karachi",
+                label: "D.G Khan",
+                value: "DGkhan",
                 icon: () => <Icon name="flag" size={18} color="#900" />,
               },
             ]}
@@ -81,9 +84,10 @@ export default class CropGrowingGuide extends Component {
             <Text
               style={{
                 alignSelf: "center",
-                marginTop: 300,
-                color: "red",
-                fontSize: 16,
+                marginTop: 50,
+                color: "Black",
+                fontSize: 20,
+                fontWeight:"bold"
               }}
             >
               Please Select any city to see crop guides
@@ -123,12 +127,44 @@ export default class CropGrowingGuide extends Component {
                 Wheat Guide
               </Text>
             </TouchableOpacity>
+            <View
+              onPress={() => {
+                navigation.navigate("WheatGuide");
+              }}
+            >
+              <Image
+                source={require("../assets/rice.jpg")}
+                style={{
+                  width: "100%",
+                  height: 200,
+                }}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.loginBtn}
+              onPress={() => {
+                this.props.navigation.navigate("wheatstep1");
+              }}
+            >
+              <Text
+                style={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  alignSelf: "center",
+                  fontSize: 20,
+                  paddingTop: 5,
+                }}
+              >
+                Rice Guide
+              </Text>
+            </TouchableOpacity>
           </View>
         ) : this.state.city == "multan" ? (
           <View>
             <View>
               <Image
-                source={require("../assets/rice.jpg")}
+                source={require("../assets/cotton.jpg")}
                 style={{
                   width: "100%",
                   height: 200,
@@ -150,7 +186,7 @@ export default class CropGrowingGuide extends Component {
                     paddingTop: 5,
                   }}
                 >
-                  Rice Guide
+                 Cotton Guide
                 </Text>
               </TouchableOpacity>
             </View>
@@ -158,7 +194,7 @@ export default class CropGrowingGuide extends Component {
             <View style={{ elevation: 4, margin: 10 }}>
               <View>
                 <Image
-                  source={require("../assets/rice.jpg")}
+                  source={require("../assets/mango.jpg")}
                   style={{
                     width: "100%",
                     height: 200,
@@ -181,16 +217,16 @@ export default class CropGrowingGuide extends Component {
                     paddingTop: 5,
                   }}
                 >
-                  Orange guide
+                  Mango Guide
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-        ) : this.state.city == "rawalpindi" ? (
+        ) : this.state.city == "Gujranwala" ? (
           <View>
             <View>
               <Image
-                source={require("../assets/rice.jpg")}
+                source={require("../assets/sugarcane.jpg")}
                 style={{
                   width: "100%",
                   height: 200,
@@ -212,15 +248,15 @@ export default class CropGrowingGuide extends Component {
                     paddingTop: 5,
                   }}
                 >
-                  sugar cane
+                  SugarCane Guide 
                 </Text>
               </TouchableOpacity>
             </View>
 
-            <View style={{ elevation: 4, margin: 10 }}>
+            <View style={{ elevation: 4 }}>
               <View>
                 <Image
-                  source={require("../assets/rice.jpg")}
+                  source={require("../assets/maize.jpg")}
                   style={{
                     width: "100%",
                     height: 200,
@@ -243,16 +279,16 @@ export default class CropGrowingGuide extends Component {
                     paddingTop: 5,
                   }}
                 >
-                  Orange guide
+                  Maize guide
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-        ) : this.state.city == "karachi" ? (
+        ) : this.state.city == "DGkhan" ? (
           <View>
             <View>
               <Image
-                source={require("../assets/rice.jpg")}
+                source={require("../assets/onions.jpg")}
                 style={{
                   width: "100%",
                   height: 200,
@@ -274,15 +310,15 @@ export default class CropGrowingGuide extends Component {
                     paddingTop: 5,
                   }}
                 >
-                  krachi Rice Guide
+                  Onion Guide
                 </Text>
               </TouchableOpacity>
             </View>
 
-            <View style={{ elevation: 4, margin: 10 }}>
+            <View style={{ elevation: 4 }}>
               <View>
                 <Image
-                  source={require("../assets/rice.jpg")}
+                  source={require("../assets/chillies.jpg")}
                   style={{
                     width: "100%",
                     height: 200,
@@ -305,46 +341,18 @@ export default class CropGrowingGuide extends Component {
                     paddingTop: 5,
                   }}
                 >
-                  Orange guide
+                  Chillies Guide
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-        ) : this.state.city == "islamabad" ? (
+        ) : this.state.city == "sargodha" ? (
           <View>
-            <View>
-              <Image
-                source={require("../assets/rice.jpg")}
-                style={{
-                  width: "100%",
-                  height: 200,
-                }}
-              />
-
-              <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={() => {
-                  this.props.navigation.navigate("wheatstep1");
-                }}
-              >
-                <Text
-                  style={{
-                    color: "#fff",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    fontSize: 20,
-                    paddingTop: 5,
-                  }}
-                >
-                  islamabad Rice Guide
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={{ elevation: 4, margin: 10 }}>
+          
+            <View >
               <View>
                 <Image
-                  source={require("../assets/rice.jpg")}
+                  source={require("../assets/oranges.jpg")}
                   style={{
                     width: "100%",
                     height: 200,
@@ -386,7 +394,7 @@ export default class CropGrowingGuide extends Component {
             </Text>
           </View>
         )}
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -398,12 +406,15 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   loginBtn: {
-    marginTop: 5,
+    
     width: Dimensions.get("window").width,
     height: 35,
 
     borderRadius: 10,
     backgroundColor: "brown",
     alignSelf: "center",
+  },
+  background: {
+    flex: 1,
   },
 });

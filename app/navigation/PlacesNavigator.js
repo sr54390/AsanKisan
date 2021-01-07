@@ -36,6 +36,25 @@ import MultanChat from "../screens/chatGroups/MultanChat";
 import KarachiChat from "../screens/chatGroups/KarachiChat";
 import RawalPindiChat from "../screens/chatGroups/RawalPindiChat";
 import OverAllChat from "../screens/chatGroups/OverAllChat";
+import islamabadShop from "../screens/ShopsLinks/islamabadShop";
+import islamabadTractor from "../screens/ShopsLinks/islamabadTractor";
+
+
+import lahoreShop from "../screens/ShopsLinks/lahoreShop";
+import lahoreTractor from "../screens/ShopsLinks/lahoreTractor";
+
+
+import pindiShop from "../screens/ShopsLinks/pindiShop";
+import pindiTractor from "../screens/ShopsLinks/pindiTractor";
+
+
+
+import karachiShop from "../screens/ShopsLinks/karachiShop";
+import karachiTractor from "../screens/ShopsLinks/karachiTractor";
+
+
+import multanShop from "../screens/ShopsLinks/multanShop";
+import multanTractor from "../screens/ShopsLinks/multanTractor";
 const PlacesNavigator = createStackNavigator(
   {
     Welcome: WelcomeScreen,
@@ -72,6 +91,20 @@ const PlacesNavigator = createStackNavigator(
     RawalPindiChat: RawalPindiChat,
     OverAllChat: OverAllChat,
     chatScreen: chatScreen,
+    islamabadShop:islamabadShop,
+    islamabadTractor:islamabadTractor,
+
+    lahoreShop:lahoreShop,
+    lahoreTractor:lahoreTractor,
+
+    pindiShop:pindiShop,
+    pindiTractor:pindiTractor,
+
+    multanShop:multanShop,
+    multanTractor:multanTractor,
+
+    karachiShop:karachiShop,
+    karachiTractor:karachiTractor
   },
   {
     defaultNavigationOptions: {

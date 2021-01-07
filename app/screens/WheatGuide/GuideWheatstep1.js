@@ -54,13 +54,7 @@ render(){
                 height: 100,
                 marginBottom:20}}/>
                 
-                 <ProgressBarAnimated
-                 
-            width={barWidth}
-            value={this.state.progress}
-            backgroundColorOnComplete="#6CC644"
-          />
-          <Text style={{fontWeight:"bold"}}>13% Completed</Text>
+          
         
             <View style={styles.container}>
                 <Text style={styles.mainHeadings}>Wheat Guide  </Text>

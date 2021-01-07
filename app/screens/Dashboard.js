@@ -11,21 +11,40 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { ceil } from "react-native-reanimated";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableNativeFeedback, TouchableOpacity } from "react-native-gesture-handler";
 import AppButton from "../components/AppButton";
 import * as firebase from "firebase";
 
 const { width: WIDTH } = Dimensions.get("window");
 import * as Location from "expo-location";
+// import {Notifications  } from "expo";
+// import * as Permissions from 'expo-permissions';
+
+
+
+
+
+
+
+
 
 export default class Dashboard extends Component {
-  state = {
+    state = {
     displayName: "",
     email: "",
     lat: 0,
     long: 0,
+    // currentUser: ""
   };
+
+
+
+
+
+  
+
   async componentDidMount() {
+    console.log("component wala shru");
     const { email, displayName } = firebase.auth().currentUser;
     this.setState({ email, displayName });
     const location = await Location.getCurrentPositionAsync({
@@ -36,12 +55,61 @@ export default class Dashboard extends Component {
       lat: location.coords.latitude,
       long: location.coords.longitude,
     });
+    console.log("component wala khtm");
+
+    // var currentUser
+    // var that = this
+    // listener = firebase.auth().onAuthStateChanged(function (user) {
+    //     if (user != null) {
+
+    //         currentUser = user
+
+    //         that.registerForPushNotificationsAsync(currentUser)
+            
+    //     }
+
+    //     listener();
+    //     console.log("permisiions mang le bhai");
+        
+
+    // });
+
   }
   signOutUser = () => {
     firebase.auth().signOut();
     this.props.navigation.navigate("Welcome");
   };
 
+
+//   registerForPushNotificationsAsync = async (currentUser) => {
+//     const { existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+//     let finalStatus = existingStatus;
+
+//     // only ask if permissions have not already been determined, because
+//     // iOS won't necessarily prompt the user a second time.
+//     if (finalStatus !== 'granted') {
+//         // Android remote notification permissions are granted during the app
+//         // install, so this will only ask on iOS
+//         const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+//         finalStatus = status;
+//     }
+
+//     // Stop here if the user did not grant permissions
+//     if (finalStatus !== 'granted') {
+//         return;
+//     }
+
+//     // Get the token that uniquely identifies this device
+//     let token = await Notifications.getExpoPushTokenAsync();
+//     if(token == '')
+//     console.log("token is empty");
+
+//     // POST the token to our backend so we can use it to send pushes from there
+//     var updates = {}
+//     updates['/expoToken'] = token
+//     await firebase.database().ref('/users/' + currentUser.uid).update(updates)
+//     //call the push notification 
+// }
   render() {
     const { navigation } = this.props;
     return (
@@ -79,10 +147,10 @@ export default class Dashboard extends Component {
                 this.state.long >= 67 &&
                 this.state.long < 68
               ? "Krachi"
-              : "Rawalpindi"}
+              : "Location is not Enable"}
           </Text>
 
-          <Icon
+          {/* <Icon
             style={styles.menuIcons}
             name={"md-notifications"}
             size={28}
@@ -90,7 +158,7 @@ export default class Dashboard extends Component {
             onPress={() => {
               this.props.navigation.navigate("Notifications");
             }}
-          />
+          /> */}
           {/* <Icon
           style={styles.menuIcons}
           name={"md-menu"}
@@ -304,7 +372,7 @@ const styles = StyleSheet.create({
   menuIcons: {
     position: "relative",
     top: 1,
-    left: 37,
+    
   },
   input: {
     width: WIDTH - 55,

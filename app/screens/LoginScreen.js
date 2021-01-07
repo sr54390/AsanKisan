@@ -94,6 +94,7 @@ export default class LoginScreen extends Component {
             <Text style={{ color: "red", fontSize: 14 }}>Sign Up</Text>
           </Text>
         </TouchableOpacity>
+        
       </ImageBackground>
     );
   }

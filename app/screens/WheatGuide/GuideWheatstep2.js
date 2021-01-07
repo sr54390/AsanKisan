@@ -19,7 +19,7 @@ import Firebase from "../../Firebase";
 import Header from "../../components/Header";
 import Weather4Guides from "../Weather4Guides";
 import Icon from "react-native-vector-icons/Ionicons";
-import { WebView } from "react-native-webview";
+
 import ProgressBarAnimated from "react-native-progress-bar-animated";
 import { Audio } from "expo-av";
 const { width: WIDTH } = Dimensions.get("window");
@@ -38,30 +38,30 @@ export default class GuideWheatstep2 extends React.Component {
 
   playAudio = async (audio_name) => {
     console.log(audio_name);
-    if (audio_name == "Plough the Farm") {
+    if (audio_name === "Plough the farm") {
       const { sound } = await Audio.Sound.createAsync(
-        require("./../../res/raw/dt.mp3")
+        require("./../../res/raw/Plough_the_farm.mp3")
       );
       //  setSound(sound);
       console.log("Playing Sound");
       await sound.playAsync();
-    } else if (audio_name == "Water the Farm") {
+    } else if (audio_name === "Water the Farm") {
       const { sound } = await Audio.Sound.createAsync(
-        require("./../../res/raw/dt.mp3")
+        require("./../../res/raw/water_the_farm.mp3")
       );
       //  setSound(sound);
       console.log("Playing Sound");
       await sound.playAsync();
     } else if (audio_name == "Wait for 10 days") {
       const { sound } = await Audio.Sound.createAsync(
-        require("./../../res/raw/dt.mp3")
+        require("./../../res/raw/wait_for_ten_days.mp3")
       );
       //  setSound(sound);
       console.log("Playing Sound");
       await sound.playAsync();
     } else if (audio_name == "Again Plough the Farm") {
       const { sound } = await Audio.Sound.createAsync(
-        require("./../../res/raw/dt.mp3")
+        require("./../../res/raw/again_Plough_the_farm.mp3")
       );
       //  setSound(sound);
       console.log("Playing Sound");
@@ -156,10 +156,10 @@ export default class GuideWheatstep2 extends React.Component {
         <View style={styles.containerOK}>
           <ProgressBarAnimated
             width={barWidth}
-            value="25"
+            value="0"
             backgroundColorOnComplete="#6CC644"
           />
-          <Text style={{ fontWeight: "bold" }}>26% Completed</Text>
+          <Text style={{ fontWeight: "bold" }}>0% Completed</Text>
           <Weather4Guides />
           <Text style={styles.mainHeadings}>Wheat Guide </Text>
           <Text style={styles.mainHeadings}>Step 2 </Text>
@@ -267,6 +267,7 @@ const ToDoItem = ({ todoItem: { todoItem: name, done }, id, funcs }) => {
           color={"black"}
         />
       </TouchableOpacity>
+      
 
       {/* <TouchableOpacity
           style={{ marginTop: 50 }}

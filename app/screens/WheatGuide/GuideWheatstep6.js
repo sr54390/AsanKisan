@@ -12,10 +12,14 @@ import {
   TextInput,
   ActivityIndicator,
   TouchableOpacity,
-  Image
+  Image,Dimensions
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import {db} from '../../Firebase';
+import Weather4Guides from "../Weather4Guides";
+import Icon from "react-native-vector-icons/Ionicons";
+
+import ProgressBarAnimated from "react-native-progress-bar-animated";
 
 export default class GuideWheatstep6 extends React.Component {
   constructor() {
@@ -58,6 +62,7 @@ export default class GuideWheatstep6 extends React.Component {
 
   render() {
     let todosKeys = Object.keys(this.state.todos);
+    const barWidth = Dimensions.get("screen").width - 30;
 
     return (
       <ScrollView
@@ -70,6 +75,13 @@ export default class GuideWheatstep6 extends React.Component {
               height: 100,
             }}
           />
+           <ProgressBarAnimated
+            width={barWidth}
+            value="60"
+            backgroundColorOnComplete="#6CC644"
+          />
+          <Text style={{ fontWeight: "bold" }}>60% Completed</Text>
+          <Weather4Guides />
        
         <View style={styles.containerOK}>
                  <Text style={styles.mainHeadings}>Wheat Guide  </Text>
@@ -147,6 +159,17 @@ const ToDoItem = ({todoItem: {todoItem: name, done}, id}) => {
       <Text style={[styles.todoText, {opacity: doneState ? 0.2 : 1}]}>
         {name}
       </Text>
+      <TouchableOpacity
+        style={{ height: 20, width: 40 }}
+        onPress={() => funcs(name)}
+      >
+        <Icon
+          style={{ left: 10 }}
+          name={"ios-play"}
+          size={28}
+          color={"black"}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

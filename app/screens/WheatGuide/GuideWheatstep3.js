@@ -12,10 +12,15 @@ import {
   TextInput,
   ActivityIndicator,
   TouchableOpacity,
-  Image
+  Image,Dimensions
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import {db} from '../../Firebase';
+import Weather4Guides from "../Weather4Guides";
+import Icon from "react-native-vector-icons/Ionicons";
+
+import ProgressBarAnimated from "react-native-progress-bar-animated";
+
 
 export default class GuideWheatstep3 extends React.Component {
   constructor() {
@@ -28,6 +33,43 @@ export default class GuideWheatstep3 extends React.Component {
     this.addNewTodo = this.addNewTodo.bind(this);
     this.clearTodos = this.clearTodos.bind(this);
   }
+
+
+  playAudio = async (audio_name) => {
+    console.log(audio_name);
+    if (audio_name === "Plough the farm") {
+      const { sound } = await Audio.Sound.createAsync(
+        require("./../../res/raw/Plough_the_farm.mp3")
+      );
+      //  setSound(sound);
+      console.log("Playing Sound");
+      await sound.playAsync();
+    } else if (audio_name === "Water the Farm") {
+      const { sound } = await Audio.Sound.createAsync(
+        require("./../../res/raw/water_the_farm.mp3")
+      );
+      //  setSound(sound);
+      console.log("Playing Sound");
+      await sound.playAsync();
+    } else if (audio_name == "Wait for 21 to 28 days") {
+      const { sound } = await Audio.Sound.createAsync(
+        require("./../../res/raw/wait_for_ten_days.mp3")
+      );
+      //  setSound(sound);
+      console.log("Playing Sound");
+      await sound.playAsync();
+    } else if (audio_name == "Again Plough the Farm") {
+      const { sound } = await Audio.Sound.createAsync(
+        require("./../../res/raw/again_Plough_the_farm.mp3")
+      );
+      //  setSound(sound);
+      console.log("Playing Sound");
+      await sound.playAsync();
+    } else {
+      console.log("hello");
+    }
+  };
+
 
   componentDidMount() {
     db.ref('/WheatGuideStep3').on('value', querySnapShot => {
@@ -58,6 +100,7 @@ export default class GuideWheatstep3 extends React.Component {
 
   render() {
     let todosKeys = Object.keys(this.state.todos);
+    const barWidth = Dimensions.get("screen").width - 30;
 
     return (
       <ScrollView
@@ -70,6 +113,13 @@ export default class GuideWheatstep3 extends React.Component {
               height: 100,
             }}
           />
+           <ProgressBarAnimated
+            width={barWidth}
+            value="15"
+            backgroundColorOnComplete="#6CC644"
+          />
+          <Text style={{ fontWeight: "bold" }}>15% Completed</Text>
+          <Weather4Guides />
        
         <View style={styles.containerOK}>
                  <Text style={styles.mainHeadings}>Wheat Guide  </Text>
@@ -147,6 +197,17 @@ const ToDoItem = ({todoItem: {todoItem: name, done}, id}) => {
       <Text style={[styles.todoText, {opacity: doneState ? 0.2 : 1}]}>
         {name}
       </Text>
+      <TouchableOpacity
+        style={{ height: 20, width: 40 }}
+        onPress={() => funcs(name)}
+      >
+        <Icon
+          style={{ left: 10 }}
+          name={"ios-play"}
+          size={28}
+          color={"black"}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

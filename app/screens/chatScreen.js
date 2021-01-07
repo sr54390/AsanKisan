@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet,ImageBackground } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import CityIcon from "react-native-vector-icons/FontAwesome5";
 
 export default class chatScreen extends Component {
   render() {
     return (
+      <ImageBackground
+      source={require("../assets/chatroomBack.jpg")}
+        style={styles.background}>
       <View styles={{}}>
         {/* <TouchableOpacity
           style={styles.loginBtn}
@@ -154,6 +157,7 @@ export default class chatScreen extends Component {
           </TouchableOpacity>
         </View>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -178,5 +182,8 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 18,
     right: 34,
+  },
+  background: {
+    flex: 1,
   },
 });
