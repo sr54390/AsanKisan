@@ -55,12 +55,21 @@ import karachiTractor from "../screens/ShopsLinks/karachiTractor";
 
 import multanShop from "../screens/ShopsLinks/multanShop";
 import multanTractor from "../screens/ShopsLinks/multanTractor";
+import adminLoginScreen from "../screens/adminLoginScreen";
+import adminDashboard from "../screens/adminDashboard";
+import viewUsers from "../screens/Admin/viewUsers";
+import sendNotifications from "../screens/Admin/sendNotifications";
+import updateCropsNews from "../screens/Admin/updateCropsNews";
+import cropsNews from "../screens/cropsNews";
+
 const PlacesNavigator = createStackNavigator(
   {
     Welcome: WelcomeScreen,
     Login: LoginScreen,
     Register: RegisterScreen,
+    Admin_Login: adminLoginScreen,
     Dashboard: Dashboard,
+    Admin: adminDashboard,
     CropGuide: CropGrowingGuide,
     Shop: ShoppingCart,
     Weather: Weather,
@@ -104,7 +113,12 @@ const PlacesNavigator = createStackNavigator(
     multanTractor:multanTractor,
 
     karachiShop:karachiShop,
-    karachiTractor:karachiTractor
+    karachiTractor:karachiTractor,
+
+    Users: viewUsers,
+    Send_Notifications : sendNotifications,
+    Admin_News: updateCropsNews,
+    CropsNews: cropsNews
   },
   {
     defaultNavigationOptions: {

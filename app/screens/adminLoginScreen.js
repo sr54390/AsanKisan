@@ -14,7 +14,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import * as firebase from "firebase";
 
 const { width: WIDTH } = Dimensions.get("window");
-export default class LoginScreen extends Component {
+export default class adminLoginScreen extends Component {
   state = {
     email: "",
     password: "",
@@ -27,7 +27,7 @@ export default class LoginScreen extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.props.navigation.navigate("Dashboard");
+        this.props.navigation.navigate("Admin");
       })
       .catch((error) => this.setState({ errorMessage: error.message }));
 
@@ -86,25 +86,15 @@ export default class LoginScreen extends Component {
         <TouchableOpacity
           style={{ marginTop: 10 }}
           onPress={() => {
-            this.props.navigation.navigate("Register");
+            this.props.navigation.navigate("Login");
           }}
         >
           <Text style={{ color: "#FFF", fontWeight: "500" }}>
-            Dont Have an account?{" "}
-            <Text style={{ color: "red", fontSize: 14 }}>Sign Up</Text>
+            Dont Have an admin account?{" "}
+            <Text style={{ color: "red", fontSize: 14 }}>Log in as a User</Text>
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{ marginTop: 10 }}
-          onPress={() => {
-            this.props.navigation.navigate("Admin_Login");
-          }}
-        >
-          <Text style={{ color: "#FFF", fontWeight: "500" }}>
-           Are you admin?
-            <Text style={{ color: "red", fontSize: 14 }}>Log in</Text>
-          </Text>
-        </TouchableOpacity>
+       
         
       </ImageBackground>
     );

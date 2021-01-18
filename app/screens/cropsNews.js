@@ -17,6 +17,7 @@ import {
   import CheckBox from "react-native-check-box";
   import Firebase from "../Firebase";
   import Icon from "react-native-vector-icons/Ionicons";
+import { Notifications } from 'expo';
  
   
   
@@ -27,42 +28,49 @@ import {
   
   
   
-  export default class Notifications extends Component {
+  export default class cropsNews extends Component {
     constructor() {
         super();
         this.state = {
           todos: {},
-          presentToDo2: "",
+          Title: "",
+          Description:""
+          
         };
     
-        this.addNewTodo = this.addNewTodo.bind(this);
-        this.clearTodos = this.clearTodos.bind(this);
+        // this.addNewTodo = this.addNewTodo.bind(this);
+        // this.clearTodos = this.clearTodos.bind(this);
       }
       componentDidMount() {
-        db.ref("/Notifications").on("value", (querySnapShot) => {
+        db.ref("/CropsNews").on("value", (querySnapShot) => {
           let data = querySnapShot.val() ? querySnapShot.val() : {};
     
-          let todoItems = { ...data };
+          let titleNews = { ...data };
           console.log(data);
           this.setState({
-            todos: todoItems,
+            todos: titleNews,
+            
           });
         });
       }
-      addNewTodo() {
-        db.ref("/Notifications").push({
-          done: false,
-          todoItem: this.state.presentToDo2,
-        });
-        Alert.alert("Congrats!", "Notifications has been sent");
-        this.setState({
-          presentToDo: "",
-        });
-      }
+    //   addNewTodo() {
+    //     db.ref("/CropsNews").push({
+         
+    //       titleNews: this.state.Title,
+    //       descriptionNews: this.state.Description
+       
+         
+    //     });
+    //     Alert.alert("Congrats!", "Notifications has been sent");
+    //     this.setState({
+    //         Title: "",
+    //         Description:""
+    //     });
+    //   }
     
-      clearTodos() {
-        db.ref("/Notifications").remove();
-      }    
+    //   clearTodos() {
+    //     db.ref("/CropsNews").remove();
+    //   }    
 
 
 // viewAllUsers(){
@@ -87,74 +95,106 @@ import {
             >
             
               {/* <TextInput
-                placeholder="Add new Todo"
-                value={this.state.presentToDo}
+                placeholder="Enter a title"
+                value={this.state.Title}
                 style={styles.textInput}
                 onChangeText={e => {
                   this.setState({
-                    presentToDo2: e,
+                    Title: e,
                   });
                 }}
                 onSubmitEditing={this.addNewTodo}
                
+              />
+               <TextInput
+                placeholder="Enter a Description"
+                value={this.state.Description}
+                style={styles.textInput}
+                onChangeText={e => {
+                  this.setState({
+                    Description: e,
+                  });
+                }}
+                onSubmitEditing={this.addNewTodo}
+               
+              />
+               <Button
+                title="Post"
+                onPress={this.addNewTodo}
+                color="black"
               /> */}
+              
               <View>
                 {todosKeys.length > 0 ? (
                   todosKeys.map((key) => (
                     <ToDoItem
                       key={key}
                       id={key}
-                      todoItem={this.state.todos[key]}
-                      funcs={this.playAudio}
+                      titleNews={this.state.todos[key]}
+                      
+                      
                     />
                   ))
                 ) : (
-                  <Text>No new notification</Text>
+                  <Text>No new posts</Text>
                 )}
               </View>
+              <View style={{flexDirection:"row"}}>
+             
+             
+              {/* <Button
+                title="Delete all Notifications"
+                onPress={this.clearTodos}
+                color="grey"
+              /> */}
               
+               
+              
+              </View>
               
             </ScrollView>
           );
         }
       }
       
-      const ToDoItem = ({ todoItem: { todoItem: name, done }, id, funcs }) => {
+      const ToDoItem = ({ titleNews: { titleNews: title, done, descriptionNews:description }, id, funcs }) => {
         const [doneState, setDone] = useState(done);
       
         const onCheck = () => {
           setDone(!doneState);
-          db.ref("/Notifications").update({
+          db.ref("/CropsNews").update({
             [id]: {
-              todoItem: name,
+                titleNews: title,
+                descriptionNews:description,
               done: !doneState,
               user: Firebase.getUid(),
+              createdAt: new Date(message.createdAt),
+              
             },
           });
         };
         return (
-          <View style={styles.todoItem}>
-            <View style={{
-  height: 32,
-  width: 32,
-  borderRadius: 30,
-  backgroundColor:"#fff",
-  justifyContent:"center",
-  alignItems:"center"
-}}>
- <Icon name={"md-notifications"} size={28} color={"#f0a500"} />
-            </View>
-            
           
-            <Text style={[styles.todoText, { opacity: doneState ? 0.2 : 1 }]}>
-              {name}
+          <View style={styles.todoItem}>
+           <View style={{flexDirection:"row"}}> 
+            <View style={{
+  height: 30,
+  width: 30,
+  borderRadius: 30,
+  backgroundColor:"#000",
+  justifyContent:"center",
+  alignItems:"center",marginRight:5,
+  marginLeft:5
+}}>
+ <Icon name={"md-book"} size={20} color={"#f0a500"} />
+            </View>
+            <Text style={styles.titleText}>
+              {title} 
             </Text>
-            <TouchableOpacity
-              style={{ height: 20, width: 40 }}
-              onPress={() => funcs(name)}
-            >
-             
-            </TouchableOpacity>
+            </View>
+            <Text style={styles.descriptionText}>
+               {description}
+            </Text>
             
       
            
@@ -167,7 +207,7 @@ import {
     },
     container: {
       flex: 1,
-      backgroundColor: "#3d7ea6",
+      backgroundColor: "#825959",
     },
     contentContainerStyle: {
       alignItems: "center",
@@ -183,22 +223,28 @@ import {
       fontSize: 20,
     },
     todoItem: {
-      flexDirection: "row",
-     left:15,
-     marginVertical:2,
-      alignItems: "center"
+        borderColor: "#23120b",
+        paddingHorizontal: 5,
+        paddingVertical: 7,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginRight: 28,
+        minWidth: "50%",
+        textAlign: "center",
+        fontWeight:"bold",
+        marginLeft:5,
+      marginVertical: 10,
+      backgroundColor:"#f9f7cf",
+      marginLeft:25
+     
     },
-    todoText: {
-      borderColor: "#1f3c88",
-      paddingHorizontal: 10,
-      paddingVertical: 7,
-      borderWidth: 1,
-      borderRadius: 10,
-      marginRight: 2,
-      minWidth: "80%",
-      
-      marginLeft:10,
-      backgroundColor:"#fff"
+     titleText: {
+        
+        fontWeight:"bold",
+        fontSize:23
+      },
+    descriptionText: {
+      fontSize:20
     },
     Stepbtn: {
       marginTop: 5,

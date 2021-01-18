@@ -28,7 +28,7 @@ import * as Location from "expo-location";
 
 
 
-export default class Dashboard extends Component {
+export default class adminDashboard extends Component {
     state = {
     displayName: "",
     email: "",
@@ -120,11 +120,10 @@ export default class Dashboard extends Component {
         <View style={styles.topNavigation}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 18,
               fontFamily: "Roboto",
               marginLeft: 10,
               color: "#fff",
-              fontWeight:"bold"
             }}
           >
             {this.state.displayName}
@@ -132,11 +131,10 @@ export default class Dashboard extends Component {
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 18,
               fontFamily: "Roboto",
               marginLeft: 10,
               color: "#fff",
-              fontWeight:"bold"
             }}
           >
             {this.state.lat >= 31 &&
@@ -152,7 +150,7 @@ export default class Dashboard extends Component {
               : "Location is not Enable"}
           </Text>
 
-          <Icon
+          {/* <Icon
             style={styles.menuIcons}
             name={"md-notifications"}
             size={28}
@@ -160,7 +158,7 @@ export default class Dashboard extends Component {
             onPress={() => {
               this.props.navigation.navigate("Notifications");
             }}
-          />
+          /> */}
           {/* <Icon
           style={styles.menuIcons}
           name={"md-menu"}
@@ -174,21 +172,20 @@ export default class Dashboard extends Component {
           color={"rgba(255,255,255,0.7) "}
         /> */}
         </View>
-        <View style={{flexDirection:"row",justifyContent:"space-around"}}>
-          <Text style={{ fontSize: 40, color: "#000", textAlign: "center",marginRight:20 }}>
-            آسان کسان
+        <View style={{marginTop:70,marginBottom:30}}>
+          <Text style={{ fontSize: 25, color: "#330000", textAlign: "center",fontFamily:"monospace" }}>
+           Asan Kisan Admin Pannel
           </Text>
-         
         </View>
 
         <View style={{ flexDirection: "row", marginLeft: 35 }}>
           <TouchableOpacity
             style={styles.dashBtn}
             onPress={() => {
-              this.props.navigation.navigate("CropGuide");
+              this.props.navigation.navigate("Send_Notifications");
             }}
           >
-            <Icon name={"ios-book"} size={56} color={"#000"} />
+            <Icon name={"md-notifications"} size={56} color={"#000"} />
             <Text
               style={{
                 color: "#000",
@@ -197,17 +194,17 @@ export default class Dashboard extends Component {
                 paddingTop: 25,
               }}
             >
-              Crop Guides
+              Send Notification
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.dashBtn}
             onPress={() => {
-              this.props.navigation.navigate("Places");
+              this.props.navigation.navigate("Admin_News");
             }}
           >
-            <Icon name={"ios-search"} size={56} color={"#000"} />
+            <Icon name={"ios-send"} size={56} color={"#000"} />
             <Text
               style={{
                 color: "#000",
@@ -216,7 +213,7 @@ export default class Dashboard extends Component {
                 paddingTop: 25,
               }}
             >
-              Place Finder
+               Send Crops News
             </Text>
           </TouchableOpacity>
         </View>
@@ -240,14 +237,8 @@ export default class Dashboard extends Component {
               Chatroom
             </Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.dashBtn}
-            onPress={() => {
-              this.props.navigation.navigate("Weather");
-            }}
-          >
-            <Icon name={"ios-partly-sunny"} size={56} color={"#000"} />
+          <TouchableOpacity style={styles.dashBtn} onPress={this.signOutUser}>
+            <Icon name={"md-power"} size={56} color={"#000"} />
             <Text
               style={{
                 color: "#000",
@@ -256,64 +247,12 @@ export default class Dashboard extends Component {
                 paddingTop: 25,
               }}
             >
-              Weather
+              Logout
             </Text>
           </TouchableOpacity>
+        
         </View>
 
-        <View style={{ flexDirection: "row", marginLeft: 35 }}>
-          <TouchableOpacity
-            style={styles.dashBtn}
-            onPress={() => {
-              this.props.navigation.navigate("Shop");
-            }}
-          >
-            <Icon name={"md-cart"} size={56} color={"#000"} />
-            <Text
-              style={{
-                color: "#000",
-                fontWeight: "bold",
-                textAlign: "center",
-                paddingTop: 25,
-              }}
-            >
-              Shop
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.dashBtn} onPress={() => {
-              this.props.navigation.navigate("CropsNews");
-            }}>
-            <Icon name={"md-book"} size={56} color={"#000"} />
-            <Text
-              style={{
-                color: "#000",
-                fontWeight: "bold",
-                textAlign: "center",
-                paddingTop: 25,
-              }}
-            >
-              Crops News
-            </Text>
-          </TouchableOpacity>
-          
-        </View>
-        <TouchableOpacity style={styles.logOutbtn} onPress={this.signOutUser}>
-          <View style={{flexDirection:"row",bottom:8}}>
-        <Icon name={"md-power"} size={30} color={"#000"} />
-           <Text
-             style={{
-               color: "#000",
-               fontWeight: "bold",
-               textAlign: "center",
-               paddingTop: 5,
-               marginLeft:10,
-               fontSize:18
-             }}
-           >
-             Logout
-           </Text>
-           </View>
-         </TouchableOpacity>
 
         {/* <View style={styles.weatherSettingPic}>
         <Image
@@ -327,13 +266,12 @@ export default class Dashboard extends Component {
 }
 const styles = StyleSheet.create({
   topNavigation: {
-    top: 0.2,
+    top: -2,
     alignItems: "center",
     backgroundColor: "black",
-    flex: 2,
+    flex: 0.2,
     flexDirection: "row",
     justifyContent: "space-around",
-  
   },
   navigationIcons: {
     right: 10,
@@ -423,17 +361,15 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     right: 34,
   },
-  logOutbtn: {
-    width: 200,
-    height: 50,
+  lastdashBtn: {
+    width: 160,
+    height: 150,
     borderRadius: 12,
     backgroundColor: "rgba(255,255,255,0.7)",
     alignItems: "center",
     alignContent: "center",
     margin: 10,
     paddingTop: 18,
-    right: -80,
-    
-    
+    right: -100,
   },
 });

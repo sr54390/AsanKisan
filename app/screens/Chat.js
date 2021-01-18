@@ -2,17 +2,14 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import Firebase from "../Firebase";
+import * as firebase from "firebase";
 
 class Chat extends Component {
   state = {
     messages: [],
     displayName: "",
   };
-  componentDidMount() {
-    const { email, displayName } = firebase.auth().currentUser;
-    this.setState({ email, displayName });
-  }
-
+  
   render() {
     return (
       <GiftedChat
@@ -29,6 +26,8 @@ class Chat extends Component {
     );
   }
   async componentDidMount() {
+    const { email, displayName } = firebase.auth().currentUser;
+    this.setState({ email, displayName });
     console.ignoredYellowBox = ["Setting a timer"];
     await Firebase.loadMessagesIslamabad((message) => {
       this.setState((previousState) => {
